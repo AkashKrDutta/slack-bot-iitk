@@ -13,9 +13,11 @@ const BUSY_FOR_LONG = `Unfortunately, the table doesn't seem to be free in the f
 
 const urls = [
 "https://i.imgur.com/6ovEqpJ.jpg",
-"https://i.imgur.com/6ovEqpJ.jpg",
-"https://i.imgur.com/6ovEqpJ.jpg",
-"https://i.imgur.com/6ovEqpJ.jpg"
+"https://www.dailydot.com/wp-content/uploads/fc3/4f/b3b78093d00ff90b.jpg",
+"https://thechive.files.wordpress.com/2018/06/best-memes-of-the-week-43-photos-253.jpg?quality=85&strip=info&w=600",
+"https://images.indianexpress.com/2017/10/kbc-memes_twitter_759.jpg",
+"https://thechive.files.wordpress.com/2018/01/best-memes-of-the-week-34-photos-2526.jpg?quality=85&strip=info&w=600",
+"https://runt-of-the-web.com/wordpress/wp-content/uploads/2017/04/funny-memes-about-donald-trump.jpg"
 ]
 module.exports = async function(bot, message) {
   let isFreeSrcDB = true;
