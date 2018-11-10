@@ -39,15 +39,18 @@ let print_data = function(bot, message ,  ret , index )
 
 	bot.createPrivateConversation(message , function(err , convo) 
 	{
-		//convo.say('I am here');
 		if (i == ret.length)
+		{
+			convo.say('End of results! ');
 			convo.stop();
+			convo.stop();
+		}
 
 		convo.ask(str , function(response , convo)
 		{
 			if (response.text == 'y')
 			{
-				print_data(bot,message,ret , i);
+				print_data(bot,message,ret , index+10);
 			}
 			else
 			{

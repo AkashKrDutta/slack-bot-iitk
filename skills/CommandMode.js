@@ -17,7 +17,7 @@ let search= require(path.join(__dirname, 'Helpers/Search.js'));
 const TIME = `(?:0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]`;
 const SCHEDULE_COMMANDS = ['\\s*getSchedule\\s*$', `\\s*getSchedule from ${TIME}\\s*$`, `\\s*getSchedule from ${TIME} to ${TIME}\\s*$`]
 const UNBOOK_COMMANDS = ['\\s*unbook all\\s*$', `\\s*unbook ${TIME}\\s*$`]
-const SEARCH_COMMANDS = ['search' , 'search - shivkr' , 'search - Chemistry' , 'search - akashdut' , 'search - Chemistry,B+' , 'search - Shivam Kumar' , 'search - 150675'] // give a regex
+const SEARCH_COMMANDS = ['search' , '^search - '] // give a regex
 
 module.exports = function(controller) {
   controller.hears(['howdy'], 'direct_message', function(bot, message) {
