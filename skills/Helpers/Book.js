@@ -207,9 +207,7 @@ module.exports = function(bot, message) {
       },
     ], {}, 'invalidDuration');
 
-    convo.addQuestion(askJoinees, [
-      exitConvo,
-      {
+    convo.addQuestion(askJoinees, [ exitConvo , {
         pattern: 'no',
         callback: function(response, convo) {
           convo.say('All right then. Enjoy the game!');

@@ -12,10 +12,12 @@ let schedule = require(path.join(__dirname, 'Helpers/Schedule.js'));
 let meme = require(path.join(__dirname, 'Helpers/Meme.js'));
 let help = require(path.join(__dirname, 'Helpers/Help.js'));
 let reset = require(path.join(__dirname, 'Helpers/ResetAll.js'));
+let search= require(path.join(__dirname, 'Helpers/Search.js'));
 
 const TIME = `(?:0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]`;
 const SCHEDULE_COMMANDS = ['\\s*getSchedule\\s*$', `\\s*getSchedule from ${TIME}\\s*$`, `\\s*getSchedule from ${TIME} to ${TIME}\\s*$`]
 const UNBOOK_COMMANDS = ['\\s*unbook all\\s*$', `\\s*unbook ${TIME}\\s*$`]
+const SEARCH_COMMANDS = ['search' , 'search - shivkr' , 'search - Chemistry' , 'search - akashdut' , 'search - Chemistry,B+' , 'search - Shivam Kumar' , 'search - 150675'] // give a regex
 
 module.exports = function(controller) {
   controller.hears(['howdy'], 'direct_message', function(bot, message) {
@@ -53,6 +55,12 @@ module.exports = function(controller) {
   controller.hears(UNBOOK_COMMANDS, 'direct_message', function(bot, message) {
     unbook(bot, message);
   });
+
+  controller.hears(SEARCH_COMMANDS, 'direct_message', function(bot, message) {
+    bot.reply(message , 'Hey!')
+    search(bot, message);
+  });
+
 
   controller.hears('^reset_all$', 'direct_message', function(bot, message) {
     reset(bot, message);
