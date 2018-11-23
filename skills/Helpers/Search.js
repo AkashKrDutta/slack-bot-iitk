@@ -1,11 +1,8 @@
 
 var request = require('request');
 var fs = require('fs');
-var urltemp = 'http://query.yahooapis.com/v1/public/yql?q=select%20%2a%20from%20yahoo.finance.quotes%20WHERE%20sy'+
-  			  'mbol%3D%27WRC%27&format=json&diagnostics=true&env=store://datatables.org/alltableswithkeys&callback';
 
 var url = 'https://search.pclub.in/api/students';
-var counter = 0 ;
 
 
 let print_data = function(bot, message ,  ret , index )
@@ -16,16 +13,16 @@ let print_data = function(bot, message ,  ret , index )
 	{
 		var temp = 
 			'-----------------------------------------------------------------------\n' +
-			'Name                : '  + ret[i]["n"] + '\n' + 
-			'Username       : ' + ret[i]["u"] + '\n' +
-			'Gender           : ' + ret[i]["g"] + '\n' +
-			'Roll Number : ' + ret[i]["i"] + '\n' +
-			'Department  : ' + ret[i]["d"] + '\n' +
-			'Programme    : ' + ret[i]["p"] + '\n' +
-			'Room Number : ' + ret[i]["r"] + '\n' +
-			'Hall                   : ' + ret[i]["h"] + '\n' +
-			'Blood Group : ' + ret[i]["b"] + '\n' +
-			'Address          : ' + ret[i]["a"] + '\n' + 
+			'Name                    :  '  + ret[i]["n"] + '\n' + 
+			'Username             :  ' + ret[i]["u"] + '\n' +
+			'Gender                  :  ' + ret[i]["g"] + '\n' +
+			'Roll Number         :  ' + ret[i]["i"] + '\n' +
+			'Department          :  ' + ret[i]["d"] + '\n' +
+			'Programme           :  ' + ret[i]["p"] + '\n' +
+			'Room Number      :  ' + ret[i]["r"] + '\n' +
+			'Hall                        :  ' + ret[i]["h"] + '\n' +
+			'Blood Group         :  ' + ret[i]["b"] + '\n' +
+			'Address                 :  ' + ret[i]["a"] + '\n' + 
 			'------------------------------------------------------------------------\n\n';
 			
 			out = out + temp; 
@@ -46,7 +43,7 @@ let print_data = function(bot, message ,  ret , index )
 
 	    // create a path for when a user says NO
 	    convo.addMessage({
-	        text: 'Ending serch!',
+	        text: 'Ending serch...',
 	    },'no_thread');
 
 	    // create a path where neither option was matched
@@ -61,8 +58,7 @@ let print_data = function(bot, message ,  ret , index )
 	        {
 	            pattern: 'y',
 	            callback: function(response, convo) {
-					counter = counter + 1 ;
-					print_data(bot,message,ret , index+ counter*10);	            	
+					print_data(bot,message,ret , index+ 10);	
 	                convo.gotoThread('yes_thread');
 	            },
 	        },
@@ -137,7 +133,7 @@ module.exports = function(bot , message)
 		let command = message.text.split(' - ');
 		if (command.length == 1)
 		{
-			bot.reply(message , 'One word Command');
+			bot.reply(message , 'Incomplete format. ');
 		}
 		else if (command.length == 2)
 		{

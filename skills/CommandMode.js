@@ -36,7 +36,7 @@ module.exports = function(controller) {
     meme(bot, message);
   });
 
-  controller.hears('\\s*help$', 'direct_message', function(bot, message) {
+  controller.hears(['\\s*help$','start'], 'direct_message', function(bot, message) {
     help(bot, message);
   });
 
@@ -57,7 +57,7 @@ module.exports = function(controller) {
   });
 
   controller.hears(SEARCH_COMMANDS, 'direct_message', function(bot, message) {
-    bot.reply(message , 'Hey!')
+   // bot.reply(message , 'Hey!')
     search(bot, message);
   });
 
@@ -70,7 +70,8 @@ module.exports = function(controller) {
 
 
 
-  controller.hears(['tasks','todo'], 'direct_message', function(bot, message) {
+  controller.hears(['tasks','todo'], 'direct_message', function(bot, message) 
+  {
 
         // load user from storage...
         controller.storage.users.get(message.user, function(err, user) {
@@ -163,9 +164,6 @@ module.exports = function(controller) {
         }
 
     });
-
-    // simple function to generate the text of the task list so that
-    // it can be used in various places
     function generateTaskList(user) {
 
         var text = '';
