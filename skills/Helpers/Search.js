@@ -5,7 +5,7 @@ var urltemp = 'http://query.yahooapis.com/v1/public/yql?q=select%20%2a%20from%20
   			  'mbol%3D%27WRC%27&format=json&diagnostics=true&env=store://datatables.org/alltableswithkeys&callback';
 
 var url = 'https://search.pclub.in/api/students';
-
+var counter = 0 ;
 
 
 let print_data = function(bot, message ,  ret , index )
@@ -39,27 +39,29 @@ let print_data = function(bot, message ,  ret , index )
 
 	bot.createPrivateConversation(message , function(err , convo) 
 	{
-		if (i == ret.length)
-		{
-			convo.say('End of results! ');
-			convo.stop();
-			convo.stop();
-		}
-
 		convo.ask(str , function(response , convo)
 		{
 			if (response.text == 'y')
-			{
-				print_data(bot,message,ret , index+10);
+			{	
+				counter = counter + 1 ;
+				print_data(bot,message,ret , index+ counter*10);
 			}
 			else
 			{
-				convo.stop();
-				convo.stop();
+				counter = 0 ;
+				i = ret.length;
+				//convo.say('Ending search. ');
+				//convo.stop();
+				//convo.stop();
 			}
 		});
-		convo.activate();
+
+		if (i < ret.length) {
+			convo.activate();
+		}
 	});
+
+	bot.reply(message , 'Ending Search...');
 }		
 
 
