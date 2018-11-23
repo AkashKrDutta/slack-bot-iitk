@@ -34,34 +34,85 @@ let print_data = function(bot, message ,  ret , index )
 	bot.reply(message  , out + '\n');
 	
 
-	var str =  'Printed ' + index + '-' + i + ' of ' +  ret.length +  ' entries. Print more?(y)' ; 
+	var str =  'Printed ' + index + '-' + i + ' of ' +  ret.length +  ' entries. Print more? (y/n)' ; 
 
 
-	bot.createPrivateConversation(message , function(err , convo) 
-	{
-		convo.ask(str , function(response , convo)
-		{
-			if (response.text == 'y')
-			{	
-				counter = counter + 1 ;
-				print_data(bot,message,ret , index+ counter*10);
-			}
-			else
-			{
-				counter = 0 ;
-				i = ret.length;
-				//convo.say('Ending search. ');
-				//convo.stop();
-				//convo.stop();
-			}
-		});
+	bot.createConversation(message, function(err, convo) {
 
-		if (i < ret.length) {
-			convo.activate();
-		}
+	    // create a path for when a user says YES
+	    convo.addMessage({
+	            // text: 'Above are more results..',
+	    },'yes_thread');
+
+	    // create a path for when a user says NO
+	    convo.addMessage({
+	        text: 'Ending serch!',
+	    },'no_thread');
+
+	    // create a path where neither option was matched
+	    // this message has an action field, which directs botkit to go back to the `default` thread after sending this message.
+	    convo.addMessage({
+	        text: 'Sorry I did not understand.',
+	        action: 'default',
+	    },'bad_response');
+
+	    // Create a yes/no question in the default thread...
+	    convo.addQuestion(str, [
+	        {
+	            pattern: 'y',
+	            callback: function(response, convo) {
+					counter = counter + 1 ;
+					print_data(bot,message,ret , index+ counter*10);	            	
+	                convo.gotoThread('yes_thread');
+	            },
+	        },
+	        {
+	            pattern: 'n',
+	            callback: function(response, convo) {
+	                convo.gotoThread('no_thread');
+	            },
+	        },
+	        {
+	            default: true,
+	            callback: function(response, convo) {
+	                convo.gotoThread('bad_response');
+	            },
+	        }
+	    ],{},'default');
+
+	    if (i<ret.length)
+		    convo.activate();
 	});
 
-	bot.reply(message , 'Ending Search...');
+
+
+
+
+	// bot.createPrivateConversation(message , function(err , convo) 
+	// {
+	// 	convo.ask(str , function(response , convo)
+	// 	{
+	// 		if (response.text == 'y')
+	// 		{	
+	// 			counter = counter + 1 ;
+	// 			print_data(bot,message,ret , index+ counter*10);
+	// 		}
+	// 		else
+	// 		{
+	// 			counter = 0 ;
+	// 			i = ret.length;
+	// 			//convo.say('Ending search. ');
+	// 			// convo.next();
+	// 			convo.stop();
+	// 		}
+	// 	});
+
+	// 	if (i < ret.length) {
+	// 		convo.activate();
+	// 	}
+	// });
+
+	
 }		
 
 

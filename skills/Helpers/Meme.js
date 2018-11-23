@@ -22,7 +22,7 @@ const urls = [
 module.exports = async function(bot, message) {
   let isFreeSrcDB = true;
   let isFreeSrcFeed = true;
-  var rn = require('random-number');
+  // var rn = require('random-number');
   var options = {
     min: 0,
     max: urls.length-1,
@@ -32,7 +32,7 @@ module.exports = async function(bot, message) {
   "attachments": [
       {
           "fallback": "Error 404: Meme not found!! Try Kicking your PC",
-          "image_url": urls[rn(options)]
+          "image_url": urls[Math.floor(Math.random() * (urls.length))]
       }
     ]
   } 
